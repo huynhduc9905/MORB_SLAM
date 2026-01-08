@@ -6,27 +6,49 @@ File.version: "1.0"
 #--------------------------------------------------------------------------------------------
 
 System.FastIMUInit: "ON"
-System.StationaryIMUInit: "OFF"
+System.StationaryIMUInit: "ON"
 System.NewMapRelocalization: "ON"
 
 #--------------------------------------------------------------------------------------------
 # Camera Parameters (calibration and biases vary from camera to camera)
 #--------------------------------------------------------------------------------------------
 
-Camera.type: "Rectified"
+Camera.type: "PinHole"
 
-# Rectified Camera calibration (OpenCV)
-Camera1.fx: 421.524
-Camera1.fy: 421.524
-Camera1.cx: 424.973
-Camera1.cy: 239.928
+# cam0 (Left)
+Camera1.fx: 386.77619557527885
+Camera1.fy: 387.3174850645625
+Camera1.cx: 326.93053246039443
+Camera1.cy: 238.4490428279562
+Camera1.k1: 0.003902496871164655
+Camera1.k2: -0.0048917299388422505
+Camera1.p1: -0.000327924937796898
+Camera1.p2: 0.000504785855640358
 
-Stereo.b: 0.0499585
+# cam1 (Right)
+Camera2.fx: 386.68977026252185
+Camera2.fy: 387.34026242827144
+Camera2.cx: 326.30249549493413
+Camera2.cy: 238.5270626206653
+Camera2.k1: 0.0033209522710514307
+Camera2.k2: -0.003891175984130757
+Camera2.p1: -0.00037065909239849664
+Camera2.p2: 0.00044027151172444613
+
+Stereo.b: 0.0501
 
 # Camera resolution
-Camera.width: 848
+Camera.width: 640
 Camera.height: 480
-
+# Transformation matrix from right camera to left camera (RIGHT -> LEFT)
+Stereo.T_c1_c2: !!opencv-matrix
+  rows: 4
+  cols: 4
+  dt: f
+  data: [ 0.999999288465,  4.84650355068e-05, -0.00119194006241,  0.0500825395283,
+         -4.85576671062e-05, 0.999999995804, -7.76861649960e-05,  0.000175089151688,
+          0.00119193629235,  7.77439875483e-05,  0.999999286622,  0.000315985207835,
+          0.0,               0.0,               0.0,              1.0 ]
 # Camera frames per second
 Camera.fps: 15
 
@@ -35,21 +57,24 @@ Stereo.ThDepth: 40.0
 
 # Transformation from body-frame (imu) to left camera
 IMU.T_b_c1: !!opencv-matrix
-   rows: 4
-   cols: 4
-   dt: f
-   data: [1.0, 0.0, 0.0, 0.00552,
-          0.0, 1.0, 0.0, -0.00510,
-          0.0, 0.0, 1.0, -0.01174,
-          0.0, 0.0, 0.0, 1.0]
+  rows: 4
+  cols: 4
+  dt: f
+  data: [ 0.99991203,  0.01326344,  0.00008163, -0.00777944,
+         -0.01326298, 0.99990324, -0.00419531,  0.00545117,
+         -0.00013727, 0.00419385,  0.9999912,   0.0146126,
+          0.0,         0.0,         0.0,        1.0 ]
 
 # IMU noise (Use those from VINS-mono)
-IMU.NoiseGyro:  0.008449 # 1e-3 # rad/s^0.5 # 1e-3 2.44e-4
-IMU.NoiseAcc: 0.01066 # 1e-2 # m/s^1.5 # 1e-2 1.47e-3
-IMU.GyroWalk: 0.000754 # rad/s^1.5  1e-6 
-IMU.AccWalk: 0.00930 # m/s^2.5  1e-4 
-IMU.AccFrequency: 250.0
-IMU.GyroFrequency: 200.0
+# Use continuous noise density values:
+IMU.NoiseAcc:  0.1800305242443325137     # accel noise density x80
+IMU.NoiseGyro: 0.0010436230346072721     # gyro noise density x5
+
+# Use random walk values:
+IMU.AccWalk:   120.0169730498423796e-04 # x60
+IMU.GyroWalk:  1.7332660869406909e-05
+IMU.AccFrequency: 100.0
+IMU.GyroFrequency: 400.0
 
 #--------------------------------------------------------------------------------------------
 # ORB Parameters
@@ -91,8 +116,8 @@ Viewer.ViewpointF: 500.0
 #--------------------------------------------------------------------------------------------
 
 # Save/Load Map
-# System.LoadAtlasFromFile: "/home/landson/MORB_SLAM/trial"
+System.LoadAtlasFromFile: "/root/MORB_SLAM/atlas"
 # System.LoadAtlasFromFile: "/home/ryan/MartinRea/MORB_SLAM/loopy"
 # System.LoadAtlasFromFile: "/home/patson/MORB_SLAM/atlases/one"
-# System.SaveAtlasToFile: "/home/sorourke/MORB_SLAM/atlases/expos"
+System.SaveAtlasToFile: "/root/MORB_SLAM/atlas"
 # System.LoadAtlasFromFile: "/home/sorourke/MORB_SLAM/atlases/expos"

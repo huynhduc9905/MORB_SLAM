@@ -59,8 +59,8 @@ def main():
 
     imu_pipeline = rs.pipeline()
     imu_config = rs.config()
-    imu_config.enable_stream(rs.stream.accel, format=rs.format.motion_xyz32f, framerate=250)
-    imu_config.enable_stream(rs.stream.gyro, format=rs.format.motion_xyz32f, framerate=200)
+    imu_config.enable_stream(rs.stream.accel, format=rs.format.motion_xyz32f, framerate=100)
+    imu_config.enable_stream(rs.stream.gyro, format=rs.format.motion_xyz32f, framerate=400)
 
     cam_pipeline.start(cam_config)
     imu_pipeline.start(imu_config)
@@ -86,7 +86,7 @@ def main():
             imu_pipeline.wait_for_frames(10000)
             cam_pipeline.wait_for_frames(10000)
             
-            while cam_frame_count < 900: # max 60 seconds
+            while cam_frame_count < 1800: # max 60 seconds
                 imu_frames = imu_pipeline.poll_for_frames()
                 cam_frames = cam_pipeline.poll_for_frames()
 
