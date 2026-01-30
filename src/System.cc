@@ -461,4 +461,8 @@ Sophus::SE3f System::GetInitialFramePose() { return mpTracker->mInitialFramePose
 
 bool System::HasInitialFramePose() { return mpTracker->mHasGlobalOriginPose; }
 
+Atlas_ptr System::getAtlas() { return mpAtlas; }
+
+Tracking_ptr System::getTracker() { return mpTracker; }
+
 }  // namespace MORB_SLAM

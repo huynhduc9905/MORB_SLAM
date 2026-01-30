@@ -111,6 +111,10 @@ class System {
 
     void SaveAtlas(int type) const;
 
+    Atlas_ptr getAtlas();
+
+    Tracking_ptr getTracker();
+
 private:
 
     bool LoadAtlas(int type);
