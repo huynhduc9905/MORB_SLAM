@@ -19,7 +19,7 @@ sudo make install
 
 cd "$parent_path"
 
-git clone --recursive https://github.com/stevenlovegrove/Pangolin.git --depth=1 -b v0.8 || true
+git clone --recursive git@github.com:huynhduc9905/Pangolin.git --depth=1 -b v0.8 || true
 
 echo ">>> Fixing Pangolin for Ubuntu 24.04..."
 if [ -d "Pangolin" ]; then
