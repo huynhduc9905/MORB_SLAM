@@ -53,7 +53,7 @@ sudo ldconfig > /dev/null 2> /dev/null
 cd "$parent_path"
 
 # IXWebSocket
-sudo apt install zlib1g zlib1g-dev libssl-dev openssl libcurl4-openssl-dev -y
+sudo apt install -y zlib1g zlib1g-dev libssl-dev openssl libcurl4-openssl-dev
 
 git clone --depth=1 --branch=v11.4.3 https://github.com/machinezone/IXWebSocket.git || true
 
