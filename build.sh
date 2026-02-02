@@ -70,7 +70,7 @@ do_vcpkg_prereqs(){
 
 # Initialize lists
 cmake_args=()
-j_arg="-j2"
+j_arg="-j$(nproc)"
 g_arg=""
 vcpkg_arg=""
 # Iterate over arguments
